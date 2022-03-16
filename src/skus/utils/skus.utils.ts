@@ -6,10 +6,3 @@ export enum TransactionType {
 }
 
 
-
-export function hasDuplicates(array:any) {
-    return _.some(array, function(elt, index) {
-        return array.indexOf(elt) !== index;
-    });
-}
-

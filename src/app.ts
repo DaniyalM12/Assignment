@@ -12,7 +12,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.listen(port, host, () => {
     log.info(`Server Listening at http://${host}:${port}`);
-    // connect();
-    router(app)
+    router(app);
 });
 

@@ -4,7 +4,12 @@ import {get, omit} from "lodash";
 import {SkusEntity} from "../entity/skus.entity";
 import _ = require("lodash");
 
-export async function fetchSKUs(sku: string) {
+/**
+ * Returns stocks for given type and sku.
+ * @function fetchSKUs
+ * @param {string} sku  stock item.
+ */
+export async function fetchSKUs(sku: string){
 
     try {
         let sku_s: SkusEntity = {sku: sku, qty: 0};
