@@ -1,4 +1,4 @@
-import {fetchStocks, generateSku} from "../../services/stocks.service";
+import {fetchStocks} from "../../services/stocks.service";
 
 
 describe('Get-SKU-S-from-stocks',()=>{
@@ -12,12 +12,12 @@ describe('Get-SKU-S-from-stocks',()=>{
         expect(data).toMatchObject(expectedResult);
     });
 
-    test('if-stock-doesnt-exist-generate-it',async ()=>{
+    test("200-stocks-for-sku-doesn't exist",async ()=>{
         const expectedResult={
             sku: expect.any(String),
             stock: expect.any(Number)
         };
-        const data =await generateSku("PGL751486/42/831");
+        const data =await fetchStocks("PGL751486/42/83123");
         expect(data).toMatchObject(expectedResult);
     });
 

@@ -9,18 +9,9 @@ var stocks = require('../../data/stock.json');
  */
 export async function fetchStocks(sku: string) {
     let stockSKUs = _.find(stocks, {sku});
-    if (stockSKUs === undefined) {
-        return generateSku(sku);
-    } else return stockSKUs;
+    return (stockSKUs === undefined)?{sku, stock: 0}:stockSKUs;
 }
 
-/**
- * Returns stock for given type and sku.
- * @function generateSku
- * @param {string} sku  stock item.
- */
-export function generateSku(sku: string) {
-    return {sku, stock: 0}
-}
+
 
 
