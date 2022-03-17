@@ -1,5 +1,5 @@
 import {fetchStocks} from "../../stocks/services/stocks.service";
-import {calculateTransactions, fetchTransactions} from "../../trancsactions/services/transaction.service";
+import {calculateTransactions, fetchTransactions} from "../../transactions/services/transaction.service";
 import {get, omit} from "lodash";
 import {SkusEntity} from "../entity/skus.entity";
 import _ = require("lodash");
