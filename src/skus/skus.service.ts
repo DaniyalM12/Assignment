@@ -1,10 +1,9 @@
-import { fetchStocks } from "../stocks/stocks.service";
-import {
-  calculateTransactions,
-  fetchTransactions,
-} from "../transactions/transaction.service";
-import { get } from "lodash";
-import { SkusEntity } from "./skus.entity";
+import {fetchStocks} from "../stocks/stocks.service";
+import {calculateTransactions, fetchTransactions,} from "../transactions/transaction.service";
+import {get} from "lodash";
+import {SkusEntity} from "./skus.entity";
+import stocks from '../data/stock.json'
+import transactions from '../data/transactions.json'
 import _ = require("lodash");
 
 /**
@@ -14,16 +13,15 @@ import _ = require("lodash");
  */
 export async function fetchSKUs(sku: string): Promise<SkusEntity> {
   try {
-    const sku_s: SkusEntity = { sku: sku, qty: 0 };
+    const sku_s: SkusEntity = {sku: sku, qty: 0};
     // Fetching stocks
-    const stocks = await fetchStocks(sku);
+    const currentStocks = await fetchStocks(sku, stocks);
     // Fetching transactions
-    const transactions = await fetchTransactions(sku);
+    const currentTransactions = await fetchTransactions(sku, transactions);
 
     //Combining and returning result
-    const quantity = await calculateTransactions(
-      transactions,
-      get(stocks, "stock")
+    const quantity = await calculateTransactions(currentTransactions,
+        get(currentStocks, "stock")
     );
 
     //Combining and returning result

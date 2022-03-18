@@ -1,25 +1,25 @@
-import { TransactionEntity } from "./transaction.entity";
-import { TransactionType } from "../skus/skus.utils";
-
-import transactions from "../data/transactions.json";
+import {TransactionEntity} from "./transaction.entity";
+import {TransactionType} from "../skus/skus.utils";
 
 /**
  * Returns transactions for given type and sku.
  * @function fetchTransactions
  * @param {string} sku  stock item.
+ * @param transactions list of transactions
  */
 
 export async function fetchTransactions(
-  sku: string
+    sku: string,
+    transactions: TransactionEntity[]
 ): Promise<TransactionEntity[]> {
   const transactionSKUs = transactions.find(
-    (transactions) => transactions.sku === sku
+      (transactions) => transactions.sku === sku
   );
   if (transactionSKUs === undefined)
     return Promise.reject(new Error("SKU does not exist ."));
 
   return transactions.filter(
-    (transaction: TransactionEntity) => transaction.sku === sku
+      (transaction: TransactionEntity) => transaction.sku === sku
   );
 }
 
@@ -32,9 +32,9 @@ export async function fetchTransactions(
 
  */
 export async function calculateTransactions(
-  transactions: TransactionEntity[],
-  stock: number,
-  quantity = 0
+    transactions: TransactionEntity[],
+    stock: number,
+    quantity = 0
 ): Promise<number> {
   transactions.forEach((transaction) => {
     if (transaction.type == TransactionType.ORDER) {

@@ -4,10 +4,11 @@ import {
 } from "../../transactions/transaction.service";
 import { fetchStocks } from "../../stocks/stocks.service";
 import { TransactionEntity } from "../../transactions/transaction.entity";
-
+import transactions from './data/transactions.json'
+import stocksMock from './data/stocks.json'
 describe("Get all SKU-S from transactions", () => {
   test("200-transactions", async () => {
-    const data = await fetchTransactions("PGL751486/42/83");
+    const data = await fetchTransactions("KSS894454/75/76",transactions);
     expect(data).toBeInstanceOf(Array);
   });
 
@@ -17,7 +18,7 @@ describe("Get all SKU-S from transactions", () => {
       type: expect.any(String),
       qty: expect.any(Number),
     };
-    const data = await fetchTransactions("PGL751486/42/83");
+    const data = await fetchTransactions("KSS894454/75/76",transactions);
     data.forEach((transaction: TransactionEntity) => {
       expect(transaction).toMatchObject(expectedResult);
     });
@@ -27,14 +28,14 @@ describe("Get all SKU-S from transactions", () => {
     const expectedResult = "SKU does not exist .";
 
     try {
-      await fetchTransactions("PGL751486/42/831");
+      await fetchTransactions("PGL751486/42/831",transactions);
     } catch (e: any) {
       expect(e.message).toBe(expectedResult);
     }
   });
   test("transactional-calculation-error", async () => {
     const expectedResult = "SKU does not exist .";
-    const data = await fetchTransactions("PGL751486/42/83");
+    const data = await fetchTransactions("KSS894454/75/76",transactions);
     try {
       await calculateTransactions(data, 2);
     } catch (e: any) {
@@ -42,21 +43,16 @@ describe("Get all SKU-S from transactions", () => {
     }
   });
   test("200-do-transactional-calculation", async () => {
-    const data = await fetchTransactions("PGL751486/42/83");
-    const stocks = await fetchStocks("PGL751486/42/83");
+    const data = await fetchTransactions("KSS894454/75/76",transactions);
+    const stocks = await fetchStocks("KSS894454/75/76",stocksMock);
     const total = await calculateTransactions(data, stocks.stock);
     expect(total).toBeGreaterThan(0);
   });
 
   test("200-do-transactional-calculation-for-refunding", async () => {
-    const data = [
-      {
-        sku: "PGL751486/42/83",
-        type: "refund",
-        qty: 23,
-      },
-    ];
-    const total = await calculateTransactions(data, 24, 34);
+    const data = await fetchTransactions("KSS894454/75/76",transactions);
+    const stocks = await fetchStocks("KSS894454/75/76",stocksMock);
+    const total = await calculateTransactions(data, stocks.stock, 25);
     expect(total).toBeGreaterThan(0);
   });
 });
