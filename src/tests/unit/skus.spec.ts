@@ -1,4 +1,4 @@
-import { fetchSKUs } from "../../skus/skus.service";
+import { fetchSKUs } from "../../services";
 
 describe("Get all SKU-S", () => {
   //Positive Case

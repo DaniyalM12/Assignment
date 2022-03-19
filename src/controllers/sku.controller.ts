@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { get } from "lodash";
-import { fetchSKUs } from "./skus.service";
+import { fetchSKUs } from "../services";
 import log from "../logger";
 
 export async function fetchSKU(req: Request, res: Response): Promise<Response> {

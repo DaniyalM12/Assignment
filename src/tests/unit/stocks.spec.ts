@@ -1,4 +1,4 @@
-import { fetchStocks } from "../../stocks/stocks.service";
+import { fetchStocks } from "../../services";
 
 import stocks from './data/stocks.json'
 

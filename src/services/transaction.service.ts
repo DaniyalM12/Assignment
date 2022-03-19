@@ -1,5 +1,5 @@
-import {TransactionEntity} from "./transaction.entity";
-import {TransactionType} from "../skus/skus.utils";
+import {TransactionEntity} from "../entities";
+import {TransactionType} from "../enums";
 
 /**
  * Returns transactions for given type and sku.

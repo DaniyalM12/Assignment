@@ -1,7 +1,7 @@
-import {fetchStocks} from "../stocks/stocks.service";
-import {calculateTransactions, fetchTransactions,} from "../transactions/transaction.service";
+import {fetchStocks} from "./stocks.service";
+import {calculateTransactions, fetchTransactions,} from "./transaction.service";
 import {get} from "lodash";
-import {SkusEntity} from "./skus.entity";
+import {SkusEntity} from "../entities";
 import stocks from '../data/stock.json'
 import transactions from '../data/transactions.json'
 import _ = require("lodash");

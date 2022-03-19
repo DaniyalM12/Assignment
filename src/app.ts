@@ -1,7 +1,7 @@
 import express from "express";
 import config from "config";
 import log from "./logger";
-import { fetchSKU } from "./skus/sku.controller";
+import { fetchSKU } from "./controllers";
 
 const host = config.get("host") as string;
 const port = config.get("port") as number;

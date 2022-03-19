@@ -1,9 +1,9 @@
 import {
   calculateTransactions,
   fetchTransactions,
-} from "../../transactions/transaction.service";
-import { fetchStocks } from "../../stocks/stocks.service";
-import { TransactionEntity } from "../../transactions/transaction.entity";
+} from "../../services";
+import { fetchStocks } from "../../services";
+import { TransactionEntity } from "../../entities";
 import transactions from './data/transactions.json'
 import stocksMock from './data/stocks.json'
 describe("Get all SKU-S from transactions", () => {
