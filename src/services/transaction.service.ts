@@ -38,7 +38,7 @@ export async function calculateTransactions(
     quantity = 0
 ): Promise<number> {
   transactions.forEach((transaction) => {
-    if (transaction.type == TransactionType.ORDER) {
+    if (transaction.type === TransactionType.ORDER) {
       quantity += transaction.qty;
     }
     if (transaction.type === TransactionType.REFUND) {
