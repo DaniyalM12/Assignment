@@ -13,7 +13,7 @@ import transactions from '../data/transactions.json'
 export async function fetchSKUs(sku: string): Promise<SkusEntity> {
   try {
 
-    const sku_s: SkusEntity = {sku: sku, qty: 0};
+    const skuS: SkusEntity = {sku: sku, qty: 0};
     // Fetching stocks
     const currentStocks = await fetchStocks(sku, stocks);
     // Fetching transactions
@@ -25,7 +25,7 @@ export async function fetchSKUs(sku: string): Promise<SkusEntity> {
     );
 
     //Combining and returning result
-    return {...sku_s, qty: quantity};
+    return {...skuS, qty: quantity};
   } catch (e: any) {
     return e.message;
   }
