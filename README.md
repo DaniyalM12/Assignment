@@ -1,7 +1,6 @@
 # Assignment
- clone project
- # npm install
- # npm run dev
+ clone project,
+ run command npm install, then run npm run dev
 
- # test url
+# Test Url
  localhost:1337/skus?sku={sku_number}
