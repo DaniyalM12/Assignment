@@ -7,5 +7,4 @@ module.exports = {
     ],
     resetMocks: true,
     clearMocks: true,
-    setupFiles: ['dotenv/config'],
 };

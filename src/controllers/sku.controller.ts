@@ -10,6 +10,12 @@ export async function fetchSKU(req: Request, res: Response): Promise<Response> {
   //Entry Point
   const response: BaseResponse<SkusEntity> = new BaseResponse();
   try {
+
+    if (!sku) {
+      response.errorExec(new Error("Invalid Request"));
+      return res.send(response.disposeResponse());
+    }
+
     const result = await fetchSKUs(sku);
     response.successExec(result);
   } catch (error: any) {

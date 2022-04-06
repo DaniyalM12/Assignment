@@ -12,9 +12,7 @@ import transactions from '../data/transactions.json'
  */
 export async function fetchSKUs(sku: string): Promise<SkusEntity> {
   try {
-    if (!sku) {
-      return Promise.reject(new Error("Invalid Request"));
-    }
+
     const sku_s: SkusEntity = {sku: sku, qty: 0};
     // Fetching stocks
     const currentStocks = await fetchStocks(sku, stocks);
