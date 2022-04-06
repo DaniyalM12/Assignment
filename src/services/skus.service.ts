@@ -1,10 +1,9 @@
 import {fetchStocks} from "./stocks.service";
 import {calculateTransactions, fetchTransactions,} from "./transaction.service";
-import {get} from "lodash";
 import {SkusEntity} from "../entities";
 import stocks from '../data/stock.json'
 import transactions from '../data/transactions.json'
-import _ = require("lodash");
+
 
 /**
  * Returns stocks for given type and sku.
@@ -13,6 +12,9 @@ import _ = require("lodash");
  */
 export async function fetchSKUs(sku: string): Promise<SkusEntity> {
   try {
+    if (!sku) {
+      return Promise.reject(new Error("Invalid Request"));
+    }
     const sku_s: SkusEntity = {sku: sku, qty: 0};
     // Fetching stocks
     const currentStocks = await fetchStocks(sku, stocks);
@@ -21,11 +23,11 @@ export async function fetchSKUs(sku: string): Promise<SkusEntity> {
 
     //Combining and returning result
     const quantity = await calculateTransactions(currentTransactions,
-        get(currentStocks, "stock")
+        currentStocks.stock
     );
 
     //Combining and returning result
-    return _.update(sku_s, ["qty"], () => quantity);
+    return {...sku_s, qty: quantity};
   } catch (e: any) {
     return e.message;
   }

@@ -1,6 +1,7 @@
 import {TransactionEntity} from "../entities";
 import {TransactionType} from "../enums";
 
+
 /**
  * Returns transactions for given type and sku.
  * @function fetchTransactions

@@ -1,13 +1,20 @@
-import { Request, Response } from "express";
-import { get } from "lodash";
-import { fetchSKUs } from "../services";
-import log from "../logger";
+import {Request, Response} from "express";
+import {fetchSKUs} from "../services";
+import {SkusEntity} from "../entities";
+import {BaseResponse} from "../response";
+
 
 export async function fetchSKU(req: Request, res: Response): Promise<Response> {
-  const sku = get(req.query, "sku") as string;
+  const sku = req.query.sku as string;
 
   //Entry Point
-  const result = await fetchSKUs(sku);
-  log.info(result);
-  return res.send(result);
+  const response: BaseResponse<SkusEntity> = new BaseResponse();
+  try {
+    const result = await fetchSKUs(sku);
+    response.successExec(result);
+  } catch (error: any) {
+    response.errorExec(error);
+  }
+
+  return res.send(response.disposeResponse());
 }
